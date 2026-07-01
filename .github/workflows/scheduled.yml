@@ -1,0 +1,20 @@
+name: Daily Workflow
+
+on:
+  schedule:
+    - cron: '0 9 * * *'   # Runs every day at 9 AM UTC
+
+jobs:
+  daily-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Main Branch Only
+        if: github.ref == 'refs/heads/main'
+        run: echo "Running on main!"
+
+      - name: Always Runs
+        run: echo "This runs on any branch triggered by schedule."
